@@ -9,46 +9,36 @@ it('read pipes config', function () {
 });
 
 it('sanitizer - trim', function () {
-    $enterValue = ' Hello';
-    $needValue = 'Hello';
+    $value = (new Sanitizer(' Hello'))->sanitize(['trim']);
 
-    $exitValue = (new Sanitizer($enterValue))->sanitize(['trim']);
-
-    expect($exitValue === $needValue)->toBeTrue();
+    expect($value)->toEqual('Hello');
 });
 
 it('sanitizer - lower', function () {
-    $enterValue = 'Hello';
-    $needValue = 'hello';
+    $value = (new Sanitizer('Hello'))->sanitize(['lower']);
 
-    $exitValue = (new Sanitizer($enterValue))->sanitize(['lower']);
-
-    expect($exitValue === $needValue)->toBeTrue();
+    expect($value)->toEqual('hello');
 });
 
 it('sanitizer - upper', function () {
-    $enterValue = 'Hello';
-    $needValue = 'HELLO';
+    $value = (new Sanitizer('Hello'))->sanitize(['upper']);
 
-    $exitValue = (new Sanitizer($enterValue))->sanitize(['upper']);
-
-    expect($exitValue === $needValue)->toBeTrue();
+    expect($value)->toEqual('HELLO');
 });
 
 it('sanitizer - numeric', function () {
-    $enterValue = '01234gf567#\89!';
-    $needValue = '0123456789';
+    $value = (new Sanitizer('01234gf567#\89!'))->sanitize(['numeric']);
 
-    $exitValue = (new Sanitizer($enterValue))->sanitize(['numeric']);
-
-    expect($exitValue === $needValue)->toBeTrue();
+    expect($value)->toEqual('0123456789');
 });
 
 it('sanitizer - mix', function () {
-    $enterValue = ' Alex@mosdev.PrO';
-    $needValue = 'alex@mosdev.pro';
+    $value = (new Sanitizer(' Alex@mosdev.PrO'))->sanitize(['trim', 'lower']);
 
-    $exitValue = (new Sanitizer($enterValue))->sanitize(['trim', 'lower']);
-
-    expect($exitValue === $needValue)->toBeTrue();
+    expect($value)->toEqual('alex@mosdev.pro');
 });
+
+
+it('sanitizer - exception', function () {
+    (new Sanitizer(' Alex@mosdev.PrO'))->sanitize(['trim2']);
+})->throws(Exception::class);

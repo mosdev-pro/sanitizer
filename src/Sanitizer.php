@@ -14,14 +14,16 @@ class Sanitizer
      * @param  array  $pipes
      * @return string
      */
-    public function sanitize(array $pipes): string
+    public function sanitize(array $pipes = []): string
     {
-        $mapPipes = collect($pipes)->map(fn($pipe) => $this->mapSanitizeKeyToPipe($pipe))->toArray();
+        if (count($pipes) > 0) {
+            $mapPipes = collect($pipes)->map(fn($pipe) => $this->mapSanitizeKeyToPipe($pipe))->toArray();
 
-        app(Pipeline::class)
-            ->send($this->value)
-            ->through($mapPipes)
-            ->then(fn ($value) => $this->value = $value);
+            app(Pipeline::class)
+                ->send($this->value)
+                ->through($mapPipes)
+                ->then(fn ($value) => $this->value = $value);
+        }
 
         return $this->value;
     }
