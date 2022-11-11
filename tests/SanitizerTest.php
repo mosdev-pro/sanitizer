@@ -26,6 +26,15 @@ it('sanitizer - lower', function () {
     expect($exitValue === $needValue)->toBeTrue();
 });
 
+it('sanitizer - upper', function () {
+    $enterValue = 'Hello';
+    $needValue = 'HELLO';
+
+    $exitValue = (new Sanitizer($enterValue))->sanitize(['upper']);
+
+    expect($exitValue === $needValue)->toBeTrue();
+});
+
 it('sanitizer - numeric', function () {
     $enterValue = '01234gf567#\89!';
     $needValue = '0123456789';
