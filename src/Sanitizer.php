@@ -33,9 +33,9 @@ class Sanitizer
      *
      * @param string $key
      * @throws \Exception
-     * @return string
+     * @return string|\Exception
      */
-    private function mapSanitizeKeyToPipe(string $key): string
+    private function mapSanitizeKeyToPipe(string $key): string|\Exception
     {
         if (!$pipe = data_get(config('sanitizer'), 'rules.' . $key)) {
             throw new \Exception('Unknown sanitizer pipe');
