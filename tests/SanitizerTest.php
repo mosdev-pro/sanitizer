@@ -2,6 +2,8 @@
 
 use \Mosdev\Sanitizer\Sanitizer;
 
+uses(Sanitizer::class);
+
 it('read pipes config', function () {
     $pipes = config('sanitizer');
 
