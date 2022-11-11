@@ -38,7 +38,6 @@ it('sanitizer - mix', function () {
     expect($value)->toEqual('alex@mosdev.pro');
 });
 
-
 it('sanitizer - exception', function () {
     (new Sanitizer(' Alex@mosdev.PrO'))->sanitize(['trim2']);
 })->throws(Exception::class);
