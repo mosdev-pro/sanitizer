@@ -4,7 +4,6 @@ namespace Mosdev\Sanitizer;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Mosdev\Sanitizer\Commands\SanitizerCommand;
 
 class SanitizerServiceProvider extends PackageServiceProvider
 {
